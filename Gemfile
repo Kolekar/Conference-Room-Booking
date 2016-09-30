@@ -29,7 +29,8 @@ gem 'kaminari'
 gem 'unicorn'
 gem 'sendgrid'
 gem 'bootstrap3-rails'
-
+gem 'rails_admin', '~> 1.0'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

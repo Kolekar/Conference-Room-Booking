@@ -30,13 +30,12 @@ ActiveRecord::Schema.define(version: 20160928153006) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "facilities_rooms_tables", force: :cascade do |t|
+  create_table "facilities_rooms", force: :cascade do |t|
     t.integer "facility_id"
     t.integer "room_id"
   end
 
   create_table "holidays", force: :cascade do |t|
-    t.string   "type"
     t.date     "date"
     t.text     "reason"
     t.datetime "created_at", null: false

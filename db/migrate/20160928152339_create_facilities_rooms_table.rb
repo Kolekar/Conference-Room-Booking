@@ -1,6 +1,6 @@
 class CreateFacilitiesRoomsTable < ActiveRecord::Migration
   def change
-    create_table :facilities_rooms_tables do |t|
+    create_table :facilities_rooms do |t|
       t.integer :facility_id
       t.integer :room_id
     end
