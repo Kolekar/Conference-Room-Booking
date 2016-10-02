@@ -1,0 +1,19 @@
+%p#notice= notice
+%h1 Listing Holidays
+%table
+  %thead
+    %tr
+      %th Type
+      %th Date
+      %th Reason
+      %th{:colspan => "3"}
+  %tbody
+    - @holidays.each do |holiday|
+      %tr
+        %td= holiday.date
+        %td= holiday.reason
+        %td= link_to 'Show', holiday
+        %td= link_to 'Edit', edit_holiday_path(holiday)
+        %td= link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Holiday', new_holiday_path

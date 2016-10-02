@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /rooms
   # GET /rooms.json
   def index
@@ -41,6 +41,7 @@ class RoomsController < ApplicationController
   # PATCH/PUT /rooms/1.json
   def update
     respond_to do |format|
+      p room_params
       if @room.update(room_params)
         format.html { redirect_to @room, notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @room }
@@ -69,6 +70,6 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:location, :capacity, :name)
+      params.require(:room).permit(:location, :capacity, :name, :facility_ids => [])
     end
 end

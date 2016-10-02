@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Date:
+  = @holiday.date
+%p
+  %strong Reason:
+  = @holiday.reason
+= link_to 'Edit', edit_holiday_path(@holiday)
+|
+= link_to 'Back', holidays_path

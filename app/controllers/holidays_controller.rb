@@ -1,6 +1,6 @@
 class HolidaysController < ApplicationController
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /holidays
   # GET /holidays.json
   def index

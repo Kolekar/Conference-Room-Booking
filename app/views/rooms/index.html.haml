@@ -1,0 +1,26 @@
+%p#notice= notice
+%h1 Listing Rooms
+%table.display{:cellspacing => "0", :id => "", :width => "100%"}
+  %thead
+    %tr
+      %th Location
+      %th Capacity
+      %th Name
+      %th Facility
+      %th Action
+  %tbody
+    - @rooms.each do |room|
+      %tr
+        %td= room.location
+        %td= room.capacity
+        %td= room.name
+        %td= room.facilities.collect(&:name).join(', ')
+        %td
+          = link_to 'Show', room
+          - if can? :edit, room
+            = link_to 'Edit', edit_room_path(room)
+          - if can? :destroy, room
+            = link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+- if can? :new, Room
+  = link_to 'New Room', new_room_path

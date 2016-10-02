@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20160928153006) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.text     "invite_email"
-    t.integer  "waiting_status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "waiting_status", default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160928153006) do
     t.string   "unconfirmed_email"
     t.string   "name"
     t.string   "phone"
-    t.integer  "role"
+    t.integer  "role",                   default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

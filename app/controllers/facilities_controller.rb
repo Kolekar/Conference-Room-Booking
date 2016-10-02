@@ -1,6 +1,6 @@
 class FacilitiesController < ApplicationController
   before_action :set_facility, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /facilities
   # GET /facilities.json
   def index

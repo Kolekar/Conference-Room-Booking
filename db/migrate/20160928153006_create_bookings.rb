@@ -6,7 +6,7 @@ class CreateBookings < ActiveRecord::Migration
       t.datetime :start_time
       t.datetime :end_time
       t.text :invite_email
-      t.integer :waiting_status
+      t.integer :waiting_status, default: 0
 
       t.timestamps null: false
     end

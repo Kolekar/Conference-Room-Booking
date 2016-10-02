@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Room:
+  = @booking.room_id
+%p
+  %strong User:
+  = @booking.user_id
+%p
+  %strong Start time:
+  = @booking.start_time
+%p
+  %strong End time:
+  = @booking.end_time
+%p
+  %strong Invite email:
+  = @booking.invite_email
+= link_to 'Edit', edit_booking_path(@booking)
+|
+= link_to 'Back', bookings_path

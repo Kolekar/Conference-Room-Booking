@@ -13,4 +13,8 @@
  *= require bootstrap
  *= require ie10-viewport-bug-workaround.css
  *= require starter-template.css
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jquery.dataTables.min.css
+ *= require fullcalendar
+ *= require bootstrap-multiselect
  */

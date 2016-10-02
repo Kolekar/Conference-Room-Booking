@@ -1,4 +1,6 @@
 RailsAdmin.config do |config|
+ 
+  config.authorize_with :cancan #TODO add cancancan to rails_admin config
 
   ### Popular gems integration
 

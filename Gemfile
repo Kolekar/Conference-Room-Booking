@@ -31,6 +31,11 @@ gem 'sendgrid'
 gem 'bootstrap3-rails'
 gem 'rails_admin', '~> 1.0'
 gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'bootstrap-multiselect-rails'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+gem "erb2haml"
+gem "haml-rails", "~> 0.9"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
