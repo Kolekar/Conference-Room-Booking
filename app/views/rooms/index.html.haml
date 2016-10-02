@@ -13,7 +13,7 @@
       %tr
         %td= room.location
         %td= room.capacity
-        %td= room.name
+        %td= link_to room.name, room
         %td= room.facilities.collect(&:name).join(', ')
         %td
           = link_to 'Show', room

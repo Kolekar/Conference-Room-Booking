@@ -8,14 +8,6 @@
         - @booking.errors.full_messages.each do |message|
           %li= message
   .field
-    = f.label :room_id
-    %br/
-    = f.number_field :room_id
-  .field
-    = f.label :user_id
-    %br/
-    = f.number_field :user_id
-  .field
     = f.label :start_time
     %br/
     = f.datetime_select :start_time

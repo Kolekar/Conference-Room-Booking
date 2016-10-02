@@ -1,10 +1,10 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :cancel_bookin]
   load_and_authorize_resource
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = current_user.bookings rescue []
   end
 
   # GET /bookings/1
@@ -30,7 +30,7 @@ class BookingsController < ApplicationController
     @url = room_bookings_path(params[:room_id])
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to room_path(@booking), notice: 'Booking was successfully created.' }
+        format.html { redirect_to room_path(params[:room_id]), notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new }
@@ -53,6 +53,11 @@ class BookingsController < ApplicationController
     end
   end
 
+  def cancel_booking
+    @booking.canceled! if can? :update, Booking
+    redirect_to root_path 
+  end
+
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
@@ -71,6 +76,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:start_time, :end_time, :invite_email)
+      params.require(:booking).permit(:start_time, :end_time, :invite_email,)
     end
 end

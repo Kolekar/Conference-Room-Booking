@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'bookings#index'
+  get '/cancel_booking/:id' => 'bookings#cancel_booking', as: :cancel_booking 
 
   devise_for :users
   resources :rooms do

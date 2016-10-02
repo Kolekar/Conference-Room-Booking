@@ -1,8 +1,23 @@
-.container
-  .starter-template
-    %h1 Bootstrap starter template
-    %p.lead
-      Use this document as a way to quickly start any new project.
-      %br/
-      All you get is this text and a mostly barebones HTML document.
-/ /.container
+%p#notice= notice
+%h1 Listing Bookings
+%table.display{:cellspacing => "0", :id => "", :width => "100%"}
+  %thead
+    %tr
+      %th Room
+      %th User
+      %th Start time
+      %th End time
+      %th Status
+      %th Action
+  %tbody
+    - @bookings.each do |booking|
+      %tr
+        %td= booking.room_id
+        %td= booking.user_id
+        %td= booking.start_time
+        %td= booking.end_time
+        %td= booking.waiting_status
+        %td
+          - unless booking.canceled?
+            = link_to 'Cancel', cancel_booking_path(booking.id)
+

@@ -8,7 +8,7 @@ class Ability
     elsif user.manager?
       can :manage, :all
     else
-      can :manage, :booking
+      can :manage, :booking, :user_id => user.id
       can :read, :all
     end
     # Define abilities for the passed in user here. For example:

@@ -1,7 +1,7 @@
 class Booking < ActiveRecord::Base
 	belongs_to :room
 	belongs_to :user
-	validate :validate_holiday, :validate_weak_end
+	validate :validate_holiday, :validate_weak_end, :validate_same_date
 	validates :room_id, :user_id, :start_time, :end_time, presence: true
 	after_create :set_avalablity
 	after_update :set_status
@@ -23,7 +23,7 @@ class Booking < ActiveRecord::Base
 	def set_status
 		if self.canceled?
 			send_booking_mail(self)
-			bookings = Booking.where("room_id = ? and waiting_status = ? and start_time > ? and end_time < ?", room_id, 1, start_time.beginning_of_day, start_time.end_of_day).order(:created_at)
+			bookings = Booking.where("id != ? and room_id = ? and waiting_status = ? and start_time > ? and end_time < ?", id, room_id, 1, start_time.beginning_of_day, start_time.end_of_day).order(:created_at)
 			bookings.each do |booking|
 				if check_avalablity(booking.start_time, booking.end_time).blank?
 					booking.booked!
@@ -33,13 +33,18 @@ class Booking < ActiveRecord::Base
 			end
 		end
 	end
-	
-	def send_booking_mail(user)
-		BookingConfirmation.booking_confirmation(user).deliver_later unless user.canceled?
-		BookingConfirmation.booking_cancellation(user).deliver_later
+
+	def send_booking_mail(booking)
+		BookingConfirmation.booking_confirmation(booking.user).deliver_later && return unless booking.canceled?
+		BookingConfirmation.booking_cancellation(booking.user).deliver_later
 	end
 
 	def check_avalablity(start_time, end_time)
-		Booking.where("(start_time > ? and start_time < ?) or (end_time > ? and end_time < ?) or (start_time < ? and end_time > ?)", start_time, end_time, start_time, end_time, start_time, end_time)
+		Booking.where("waiting_status = ? and ((start_time > ? and start_time < ?) or (end_time > ? and end_time < ?) or (start_time < ? and end_time > ?))", 0, start_time, end_time, start_time, end_time, start_time, end_time)
+	end
+
+	def validate_same_date
+		errors[:base]<<"Please book for one day" unless start_time.to_date == end_time.to_date
+		errors[:base]<<"Start time mustg be less than End Time" unless start_time < end_time
 	end
 end
