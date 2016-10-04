@@ -78,12 +78,22 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   
-  ActionMailer::Base.smtp_settings = {
-  :port           => 587,
-  :address        => 'smtp.mailgun.org',
-  :user_name      => 'postmaster@sandboxd52c431ea3874aaf801a9564a9cf64ad.mailgun.org',
-  :password       => 'Harry@123',
-  :authentication => :plain,
+#   ActionMailer::Base.smtp_settings = {
+#   :port           => 587,
+#   :address        => 'smtp.mailgun.org',
+#   :user_name      => 'postmaster@sandboxd52c431ea3874aaf801a9564a9cf64ad.mailgun.org',
+#   :password       => 'Harry@123',
+#   :authentication => :plain,
+# }
+# ActionMailer::Base.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "gmail.com",
+      :user_name            => ENV["GMAIL_USERNAME"],
+      :password             => ENV["GMAIL_PASSWORD"],
+      :authentication       => :plain,
+      :enable_starttls_auto => true
 }
 ActionMailer::Base.delivery_method = :smtp
 end
