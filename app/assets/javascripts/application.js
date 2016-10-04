@@ -33,6 +33,10 @@ $('#calendar').fullCalendar({header: {
     },
      weekends: { default: true
     	
-    }
+    },
+    events: gon.bookings,
+    color: 'yellow',   // an option!
+    textColor: 'black' // an option!
+
 });
 } );

@@ -10,6 +10,8 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+        gon.bookings = Booking.includes(:user).where(room_id: 3).map{|a| {title: a.user.email, start: a.start_time.strftime("%Y-%m-%dT%H:%M:%S"),end: a.end_time.strftime("%Y-%m-%dT%H:%M:%S")}}
+
   end
 
   # GET /rooms/new

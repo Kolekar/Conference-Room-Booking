@@ -2,14 +2,21 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new
+    p "**************"
+    p  user
+    user||= User.new
     if user.guest?
       can :read, :all
     elsif user.manager?
       can :manage, :all
-    else
+      cannot :manage, [:user]
+    elsif user.user?
       can :manage, :booking, :user_id => user.id
       can :read, :all
+    else
+      can :access, :rails_admin   # grant access to rails_admin
+      can :dashboard              # grant access to the dashboard
+      can :manage, :all
     end
     # Define abilities for the passed in user here. For example:
     #

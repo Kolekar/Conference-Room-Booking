@@ -74,6 +74,11 @@ GEM
       momentjs-rails (>= 2.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gon (6.0.1)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -126,6 +131,10 @@ GEM
     orm_adapter (0.5.0)
     pg (0.19.0)
     pkg-config (1.1.7)
+    rabl-rails (0.4.1)
+      activesupport (>= 3.1)
+      railties (>= 3.1)
+      thread_safe (~> 0.3.1)
     rack (1.6.4)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -174,6 +183,7 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     remotipart (1.3.0)
+    request_store (1.3.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     ruby_parser (3.8.2)
@@ -233,6 +243,7 @@ DEPENDENCIES
   devise
   erb2haml
   fullcalendar-rails
+  gon
   haml
   haml-rails (~> 0.9)
   jbuilder (~> 2.0)
@@ -241,6 +252,7 @@ DEPENDENCIES
   kaminari
   momentjs-rails
   pg
+  rabl-rails
   rails (= 4.2.4)
   rails_admin (~> 1.0)
   sass-rails (~> 5.0)

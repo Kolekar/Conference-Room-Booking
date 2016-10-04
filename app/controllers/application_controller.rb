@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+
+  def current_admin_user
+  	current_user
+  end
 end
