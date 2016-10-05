@@ -62,13 +62,14 @@ class HolidaysController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_holiday
-      @holiday = Holiday.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def holiday_params
-      params.require(:holiday).permit(:date, :reason)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_holiday
+    @holiday = Holiday.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def holiday_params
+    params.require(:holiday).permit(:date, :reason)
+  end
 end

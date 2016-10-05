@@ -5,10 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :bookings
-  enum role: [ :user, :manager, :admin ]
+  enum role: [:user, :manager, :admin]
 
   def guest?
-  	id.blank?
+    id.blank?
   end
-
 end

@@ -4,7 +4,11 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = current_user.bookings rescue []
+    @bookings = begin
+                  current_user.bookings
+                rescue
+                  []
+                end
   end
 
   # GET /bookings/1
@@ -20,13 +24,13 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
-  	@url = room_bookings_path(params[:room_id], @booking)
+    @url = room_bookings_path(params[:room_id], @booking)
   end
 
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params.merge({user_id: current_user.id, room_id: params[:room_id]}))
+    @booking = Booking.new(booking_params.merge(user_id: current_user.id, room_id: params[:room_id]))
     @url = room_bookings_path(params[:room_id])
     respond_to do |format|
       if @booking.save
@@ -43,7 +47,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1.json
   def update
     respond_to do |format|
-      if @booking.update(booking_params.merge({user_id: current_user.id, room_id: params[:room_id]}))
+      if @booking.update(booking_params.merge(user_id: current_user.id, room_id: params[:room_id]))
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
@@ -55,7 +59,7 @@ class BookingsController < ApplicationController
 
   def cancel_booking
     @booking.canceled! if can? :update, Booking
-    redirect_to root_path 
+    redirect_to root_path
   end
 
   # DELETE /bookings/1
@@ -69,13 +73,14 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def booking_params
-      params.require(:booking).permit(:start_time, :end_time, :invite_email,)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def booking_params
+    params.require(:booking).permit(:start_time, :end_time, :invite_email)
+  end
 end

@@ -10,8 +10,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
-        gon.bookings = Booking.includes(:user).where(room_id: 3).map{|a| {title: a.user.email, start: a.start_time.strftime("%Y-%m-%dT%H:%M:%S"),end: a.end_time.strftime("%Y-%m-%dT%H:%M:%S")}}
-
+    gon.bookings = Booking.includes(:user).where(room_id: 3).map { |a| { title: a.user.email, start: a.start_time.strftime('%Y-%m-%dT%H:%M:%S'), end: a.end_time.strftime('%Y-%m-%dT%H:%M:%S') } }
   end
 
   # GET /rooms/new
@@ -65,13 +64,14 @@ class RoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def room_params
-      params.require(:room).permit(:location, :capacity, :name, :facility_ids => [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_room
+    @room = Room.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def room_params
+    params.require(:room).permit(:location, :capacity, :name, facility_ids: [])
+  end
 end

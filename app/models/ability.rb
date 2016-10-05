@@ -2,16 +2,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    p "**************"
-    p  user
-    user||= User.new
+    p '**************'
+    p user
+    user ||= User.new
     if user.guest?
       can :read, :all
     elsif user.manager?
       can :manage, :all
       cannot :manage, [:user]
     elsif user.user?
-      can :manage, :booking, :user_id => user.id
+      can :manage, :booking, user_id: user.id
       can :read, :all
     else
       can :access, :rails_admin   # grant access to rails_admin

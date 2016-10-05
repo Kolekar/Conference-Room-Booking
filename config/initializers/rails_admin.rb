@@ -1,6 +1,5 @@
 RailsAdmin.config do |config|
- 
-  config.authorize_with :cancan #TODO add cancancan to rails_admin config
+  config.authorize_with :cancan # TODO: add cancancan to rails_admin config
 
   ### Popular gems integration
 
@@ -24,7 +23,6 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar true
-
 
   config.model User do
     update do
