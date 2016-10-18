@@ -11,7 +11,7 @@ class HolidaysDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: holidays.count,
-      iTotalDisplayRecords: holidays.total_entries,
+      iTotalDisplayRecords: holidays.total_count,
       aaData: data
     }
   end
@@ -34,7 +34,7 @@ class HolidaysDatatable
 
   def fetch_holidays
     @holidays = Holiday.all.order("#{sort_column} #{sort_direction}")
-    @holidays = holidays.page(page).per_page(per_page)
+    @holidays = holidays.page(page).per(per_page)
     if params[:search][:value].present?
       @holidays = holidays.where('date like :search or reason like :search ', search: "%#{params[:search][:value]}%")
     end

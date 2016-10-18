@@ -11,7 +11,7 @@ class FacilitiesDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: facilities.count,
-      iTotalDisplayRecords: facilities.total_entries,
+      iTotalDisplayRecords: facilities.total_count,
       aaData: data
     }
   end
@@ -33,7 +33,7 @@ class FacilitiesDatatable
 
   def fetch_facilities
     @facilities = Facility.all.order("#{sort_column} #{sort_direction}")
-    @facilities = facilities.page(page).per_page(per_page)
+    @facilities = facilities.page(page).per(per_page)
     if params[:search][:value].present?
       facilities = facilities.where('name like :search  ', search: "%#{params[:search][:value]}%")
     end

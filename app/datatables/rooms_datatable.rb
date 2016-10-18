@@ -11,7 +11,7 @@ class RoomsDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: rooms.count,
-      iTotalDisplayRecords: rooms.total_entries,
+      iTotalDisplayRecords: rooms.total_count,
       aaData: data
     }
   end
@@ -36,7 +36,7 @@ class RoomsDatatable
 
   def fetch_rooms
     rooms = Room.all.order("#{sort_column} #{sort_direction}")
-    rooms = rooms.page(page).per_page(per_page)
+    rooms = rooms.page(page).per(per_page)
     if params[:search][:value].present?
       rooms = rooms.where('name like :search or location like :search or capacity like :search ', search: "%#{params[:search][:value]}%")
     end

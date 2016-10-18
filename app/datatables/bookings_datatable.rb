@@ -11,7 +11,7 @@ class BookingsDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: bookings.count,
-      iTotalDisplayRecords: bookings.total_entries,
+      iTotalDisplayRecords: bookings.total_count,
       aaData: data
     }
   end
@@ -37,7 +37,7 @@ class BookingsDatatable
 
   def fetch_bookings
     @bookings = Booking.includes(:room, :user).all.order("#{sort_column} #{sort_direction}")
-    @bookings = bookings.page(page).per_page(per_page)
+    @bookings = bookings.page(page).per(per_page)
     # if params[:search][:value].present?
     #   @bookings = bookings.where("name like :search or location like :search or capacity like :search ", search: "%#{params[:search][:value]}%")
     # end
