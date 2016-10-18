@@ -22,8 +22,12 @@
 //= require fullcalendar
 //= require bootstrap-multiselect
 
-$(document).on('ready turbolinks:load', function () {
-    $('table.display').DataTable();
+$(document).on('turbolinks:load', function () {
+    $('table.display').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": $('table.display').data('source')
+    });
     $('#room_facility_ids').multiselect();
     
 $('#calendar').fullCalendar({header: {
@@ -34,9 +38,15 @@ $('#calendar').fullCalendar({header: {
      weekends: { default: true
     	
     },
-    events: gon.bookings,
-    color: 'yellow',   // an option!
-    textColor: 'black' // an option!
+    // events: gon.bookings,
+    // color: 'yellow',   // an option!
+    // textColor: 'black' // an option!
+     events: {
+        url: window.location.href+'.json',
+        error: function() {
+            alert('there was an error while fetching events!');
+        },
+    }
 
 });
 } );

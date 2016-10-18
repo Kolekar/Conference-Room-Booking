@@ -1,17 +1,9 @@
 %p#notice= notice
 %h1 Listing Facilities
-%table.display{:cellspacing => "0", :id => "", :width => "100%"}
+%table.display{:cellspacing => "0", :id => "", :width => "100%", 'data-source' => facilities_path(format: "json")}
   %thead
     %tr
       %th Name
       %th Action
-  %tbody
-    - @facilities.each do |facility|
-      %tr
-        %td= facility.name
-        %td
-          = link_to 'Show', facility
-          = link_to 'Edit', edit_facility_path(facility)
-          = link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
 = link_to 'New Facility', new_facility_path

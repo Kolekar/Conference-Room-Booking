@@ -1,20 +1,11 @@
 %p#notice= notice
 %h1 Listing Holidays
-%table.display{:cellspacing => "0", :id => "", :width => "100%"}
+%table.display{:cellspacing => "0", :id => "", :width => "100%", 'data-source' => holidays_path(format: "json")}
   %thead
     %tr
      
       %th Date
       %th Reason
       %th Action
-  %tbody
-    - @holidays.each do |holiday|
-      %tr
-        %td= holiday.date
-        %td= holiday.reason
-        %td
-          =link_to 'Show', holiday
-          = link_to 'Edit', edit_holiday_path(holiday)
-          = link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+  %br/
 = link_to 'New Holiday', new_holiday_path

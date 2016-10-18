@@ -5,6 +5,10 @@ class FacilitiesController < ApplicationController
   # GET /facilities.json
   def index
     @facilities = Facility.all
+    respond_to do |format|
+      format.html
+      format.json { render json: FacilitiesDatatable.new(view_context) }
+    end
   end
 
   # GET /facilities/1

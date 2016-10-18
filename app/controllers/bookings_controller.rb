@@ -9,6 +9,10 @@ class BookingsController < ApplicationController
                 rescue
                   []
                 end
+    respond_to do |format|
+      format.html
+      format.json { render json: BookingsDatatable.new(view_context) }
+    end
   end
 
   # GET /bookings/1

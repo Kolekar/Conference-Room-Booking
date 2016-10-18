@@ -5,6 +5,10 @@ class HolidaysController < ApplicationController
   # GET /holidays.json
   def index
     @holidays = Holiday.all
+    respond_to do |format|
+      format.html
+      format.json { render json: HolidaysDatatable.new(view_context) }
+    end
   end
 
   # GET /holidays/1

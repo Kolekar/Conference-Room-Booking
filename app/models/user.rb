@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
   def guest?
     id.blank?
   end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+  delegate :can?, :cannot?, to: :ability
 end

@@ -1,6 +1,6 @@
 %p#notice= notice
 %h1 Listing Bookings
-%table.display{:cellspacing => "0", :id => "", :width => "100%"}
+%table.display{:cellspacing => "0", :id => "", :width => "100%", 'data-source' => root_path(format: "json")}
   %thead
     %tr
       %th Room
@@ -9,15 +9,4 @@
       %th End time
       %th Status
       %th Action
-  %tbody
-    - @bookings.each do |booking|
-      %tr
-        %td= booking.room_id
-        %td= booking.user_id
-        %td= booking.start_time
-        %td= booking.end_time
-        %td= booking.waiting_status
-        %td
-          - unless booking.canceled?
-            = link_to 'Cancel', cancel_booking_path(booking.id)
-
+  
