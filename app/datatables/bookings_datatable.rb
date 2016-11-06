@@ -3,8 +3,9 @@ class BookingsDatatable
   include ApplicationHelper
   delegate :params, to: :@view
 
-  def initialize(view)
+  def initialize(view, user)
     @view = view
+    @user = user
   end
 
   def as_json(_options = {})
@@ -36,8 +37,8 @@ class BookingsDatatable
   end
 
   def fetch_bookings
-    @bookings = Booking.includes(:room, :user).all.order("#{sort_column} #{sort_direction}")
-    @bookings = bookings.page(page).per(per_page)
+    @bookings = @user.bookings.includes(:room, :user).all.order("#{sort_column} #{sort_direction}")rescue Booking.where(id: 0)
+    @bookings = bookings.page(page).per(per_page) 
     # if params[:search][:value].present?
     #   @bookings = bookings.where("name like :search or location like :search or capacity like :search ", search: "%#{params[:search][:value]}%")
     # end

@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
                 end
     respond_to do |format|
       format.html
-      format.json { render json: BookingsDatatable.new(view_context) }
+      format.json { render json: BookingsDatatable.new(view_context, current_user) }
     end
   end
 
